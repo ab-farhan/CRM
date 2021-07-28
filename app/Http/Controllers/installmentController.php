@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Installment;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class InstallmentController extends Controller
 {
@@ -160,13 +161,14 @@ public  function installment_payment_paid(Request $request,$id,$no)
     //dd($user->due_amount);
     $user->save();
     $ins->save();
-    $notification = array(
-        'message' =>  'Installment Payment Add Successfully',
-        'alert-type' => 'success'
-    );
-    return redirect("/admin/member/{$id}")->with($notification);
 
-
+    if($ins==true && $user == true){
+        Session::flash('success','Pay Intallment');
+        return redirect("/admin/member/{$id}");
+    }else{
+        Session::flash('error','Failed to Pay Installment');
+    }
+   
 
 }
 

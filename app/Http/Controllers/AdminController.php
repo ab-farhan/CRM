@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Http\Controllers\Throwable;
-use Session;
+use Illuminate\Support\Facades\Session;
 use App\Models\Admin;
 use App\Models\User;
 use App\Models\Installment;
@@ -25,7 +25,8 @@ use PhpParser\Node\Expr\FuncCall;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use PDF;
-use Image;
+// use Image;
+use Intervention\Image\Facades\Image;
 
 class AdminController extends Controller
 {
@@ -483,12 +484,13 @@ class AdminController extends Controller
 
 
         $add_user->save();
-        $notification = array(
-            'message' =>  'Member Update Successfully',
-            'alert-type' => 'success'
-        );
-        echo "<h1>Data Updated Successfully<h1>";
-        return redirect("admin/member/{$add_user->id}")->with($notification);
+        if($add_user==true){
+            Session::flash('success','Create New Member');
+            return redirect("admin/member/{$add_user->id}");
+        }else{
+            Session::flash('error','Failed to Create Member');
+        }
+        
 
     }
 
@@ -534,32 +536,12 @@ class AdminController extends Controller
 
     public function store_new(Request $request)
     {
-        // $this->validate($request,[
-        //     'name' => 'required|string|max:255',
-        //     'email'=>'required',
-        //     'profile_photo_path'=>'required',
-        //     'password'=>'required',
-        // ],[]);
-
-        $validatedData = $request->validate([
+         $request->validate([
             'name' => 'required|string|max:255',
             'email'=>'required',
             // 'profile_photo_path'=>'required',
             'password'=>'required',
         ]);
-
-        // $request['password'] = bcrypt($request->password);
-        // $user = admin::create($request->all());
-
-        // if($request->hasfile('profile_photo_path'))
-        //     {
-        //         $file = $request->file('profile_photo_path');
-        //         $extension = $file->getClientOriginalExtension();
-        //         $filename = time().".".$extension;
-        //         $file->move("Upload_image/", $filename);
-        //         $user->profile_photo_path = $filename;
-        //         $user->save();
-        //     }
         $insert=Admin::insertGetId([
             'name' => $request->name, 
             'email' => $request->email, 
@@ -570,13 +552,18 @@ class AdminController extends Controller
                 $image=$request->file('profile_photo_path');
                 $imageName='admin'.time().'-'.$insert.'.'.$image->getClientOriginalExtension();
                 Image::make($image)->save(base_path('public/Upload_image/'.$imageName));
-                Admin::where('id',$insert)->update([
+                $insert=Admin::where('id',$insert)->update([
                     'profile_photo_path'=>$imageName,
                     'updated_at'=>Carbon::now()->toDateTimeString(),
                 ]);
             }
+            if($insert){
+                Session::flash('success','Create New Admin');
+                return redirect(route('admin.view_admin'));
+            }else{
+                Session::flash('error','Failed to Create Admin');
+            }
             
-        return redirect(route('admin.view_admin'));
     }
 
      function edit_admin($id)
@@ -587,20 +574,45 @@ class AdminController extends Controller
 
      function update_admin(Request $request,$id)
      {
+         $request->validate([
+            'name' => 'required|string|max:255',
+            'email'=>'required|email',
+            // 'profile_photo_path'=>'required',
+            //'password'=>'required',
+        ]);
         $admin=Admin::find($id);
         $admin->name=$request->name;
         $admin->email=$request->email;
-
+        if($request->hasFile('profile_photo_path')){
+            $image=$request->file('profile_photo_path');
+            $imageName='admin'.time().'-'.$id.'.'.$image->getClientOriginalExtension();
+            Image::make($image)->save(base_path('public/Upload_image/'.$imageName));
+            Admin::where('id',$id)->update([
+                'profile_photo_path'=>$imageName,
+                'updated_at'=>Carbon::now()->toDateTimeString(),
+            ]);
+        }
         $admin->save();
-
-
-        return redirect(route('admin.view_admin'))->with('message','User updated successfully');
+        if($admin){
+            Session::flash('success','Update Admin');
+            return redirect(route('admin.view_admin'));
+        }else{
+            Session::flash('error','Update Failed');
+        }
+        
+       
      }
 
     public function delete($id)
     {
-        Admin::findOrFail($id)->delete();
-        return redirect()->back();
+        $adminDelete=Admin::findOrFail($id)->delete();
+        if($adminDelete){
+            Session::flash('success','Delete Admin');
+            return redirect()->back();
+        }else{
+            Session::flash('error','Delete Failed');
+        }
+        
     }
 
     public function basic(){
@@ -715,12 +727,14 @@ class AdminController extends Controller
 
 
         $add_user->save();
-        $notification = array(
-            'message' =>  'Member Update Successfully',
-            'alert-type' => 'success'
-        );
-        echo "<h1>Data Updated Successfully<h1>";
-        return redirect("admin/member/{$add_user->id}")->with($notification);
+        if($add_user==true){
+            Session::flash('success','Create Update Member');
+            return redirect("admin/member/{$add_user->id}");
+        }else{
+            Session::flash('error','Failed to Update Member');
+        }
+
+        
 
 
     }

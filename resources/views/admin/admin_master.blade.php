@@ -2,7 +2,7 @@
 <div class="wrapper">
 
   <!-- Preloader -->
-  @include('admin.body.admin_preloader')
+  {{-- @include('admin.body.admin_preloader') --}}
 
   <!-- Navbar -->
   @include('admin.body.admin_navbar')

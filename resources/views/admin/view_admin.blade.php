@@ -28,7 +28,7 @@
                                     {{-- <h3 class="box-title d-inline-block float-left"></h3> --}}
                                     <a class='col-lg-offset-5 btn btn-success float-right' href="{{ route('admin.create_admin') }}"><i class="fas fa-plus-circle mr-2"></i> Add Admin</a>
                                 </div>
-
+                            
                                 <!-- /.box-header -->
                                 <div class="box-body card card-body">
                                     <table id="example1" class="table table-bordered table-striped" >

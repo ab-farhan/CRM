@@ -92,7 +92,7 @@ Route::prefix('admin')->name('admin.')->group(function()
      Route::post('/installment_update/{id}/{no}',[installmentController::class,'installment_update']);
      
      //add installment payment for user
-     Route::get('/payment/{id}/{no}',[installmentController::class,'installment_payment']);
+     Route::get('/payment/{id}/{no}',[installmentController::class,'installment_payment'])->middleware('auth:admin');
  
      Route::post('/installment_payment_submit/{id}/{no}',[installmentController::class,'installment_payment_paid']);
 

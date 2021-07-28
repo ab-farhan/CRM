@@ -18,7 +18,7 @@
         </div>
       </div><!-- /.container-fluid -->
     </section>
-
+   
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
@@ -416,11 +416,11 @@
                 <!-- /.card-header -->
                 <div class="card-body">
                   <table id="example2" class="table table-bordered table-hover">
-                    <thead>
+                    <thead class="bg-info">
                     <tr>
                       <th>Booking Money Info</th>
                       <th>Amount</th>
-                      <th><button type="button" class="btn btn-info">Paid/Due</button></th>
+                      <th>Paid/Due</th>
                       <th>Payment Type</th>
                       <th>Paid Date</th>
                       <th>Due Date</th>

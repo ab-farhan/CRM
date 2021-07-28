@@ -26,7 +26,22 @@
   <link rel="stylesheet" href="{{ asset('backend/plugins/daterangepicker/daterangepicker.css') }}">
   <!-- summernote -->
   <link rel="stylesheet" href="{{ asset('backend/plugins/summernote/summernote-bs4.min.css') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
     @yield('header_css')
+  {{-- jqury js  --}}
+  <script src="{{ asset('backend/plugins/jquery/jquery.min.js') }}"></script>
+  {{-- sweet alert js  --}}
+  <script src="{{ asset('backend/dist/js/sweetalert.min.js') }}"></script>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
+  @if(Session::has('success'))
+  <script>
+      swal({title: "Sucessfully",text: "{{Session::get('success') }}",icon: "success",});
+  </script>
+  @endif
+  @if(Session::has('error'))
+  <script>
+      swal({title: "Opps!!",text: "{{Session::get('error') }}",icon: "success",});
+  </script>
+  @endif
+  
