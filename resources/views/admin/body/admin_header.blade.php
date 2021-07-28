@@ -41,7 +41,7 @@
   @endif
   @if(Session::has('error'))
   <script>
-      swal({title: "Opps!!",text: "{{Session::get('error') }}",icon: "success",});
+      swal({title: "Opps!!",text: "{{Session::get('error') }}",icon: "error",});
   </script>
   @endif
   

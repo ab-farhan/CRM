@@ -219,10 +219,6 @@
                           </div>
                         </div>
 
-
-
-
-
                           <div class="row">
                             <div class="col-lg-6">
                               <div class="form-group mb-3">
@@ -571,7 +567,62 @@
         <!-- /.container-fluid -->
       </section>
       <!-- /.content -->
-
+<div class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-8 mx-auto">
+        <div class="contact-form">
+          <h1>Get in Touch</h1>
+                  {{-- @if(session()->has('message'))
+                      <div class="alert alert-success">
+                          {{ session()->get('message') }}
+                      </div>
+                  @endif --}}
+                  <form action="{{ route('admin.send.email') }}" method="post">
+                  @csrf
+            <div class="row ">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="inputName">Name</label>
+                  <input type="text" name="name" class="form-control" placeholder="Enter Name" value="{{$user->member_name}}">
+                                  @error('name')
+                                  <span class="text-danger"> {{ $message }} </span>
+                                  @enderror
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="inputEmail">Email</label>
+                  <input type="email" name="email" class="form-control" placeholder="Enter Email" value="abfarhan015@gmail.com">
+                                  @error('email')
+                                  <span class="text-danger"> {{ $message }} </span>
+                                  @enderror
+                </div>
+              </div>
+            </div>            
+            <div class="form-group ">
+              <label for="inputSubject">Subject</label>
+                          <input type="text" name="subject" class="form-control" placeholder="Instament paid successfull" value="Instament paid successfully">
+                          @error('subject')
+                          <span class="text-danger"> {{ $message }} </span>
+                          @enderror
+            </div>
+            <div class="form-group">
+              <label for="inputMessage">Message</label>
+                          <textarea name="content" rows="5" class="form-control" placeholder="Enter Your Message"></textarea>
+                          @error('content')
+                          <span class="text-danger"> {{ $message }} </span>
+                          @enderror
+            </div>
+            <div class="text-center">
+              <button type="submit" class="btn btn-primary"><i class="fa fa-paper-plane"></i> Send</button>
+            </div>            
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
       <!-- for pdf  -->
      <section class="content">

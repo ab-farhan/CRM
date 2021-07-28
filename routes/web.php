@@ -7,6 +7,7 @@ use Laravel\Fortify\Features;
 use Laravel\Fortify\Http\Controllers\RegisteredUserController;
 use Laravel\Jetstream\Rules\Role;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\EmailController;
 use App\Http\Controllers\InstallmentController;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\SearchController;
@@ -119,5 +120,9 @@ Route::prefix('admin')->name('admin.')->group(function()
     Route::get('/basic/showingData', [AdminController::class, 'basicShowDataUpdate'])->middleware('auth:admin');
 
     Route::post('/basic/update/{id}', [AdminController::class, 'basicUpdate'])->middleware('auth:admin');
+
+    //email send
+    Route::get('/email',[EmailController::class,'create']);
+    Route::post('/email',[EmailController::class,'sendEmail'])->name('send.email');
    
 });

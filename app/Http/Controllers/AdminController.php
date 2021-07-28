@@ -281,12 +281,12 @@ class AdminController extends Controller
         $add_user->due_amount=$due_money;
 
         $add_user->save();
-
-        $notification = array(
-            'message' =>  'Member Add Successfully',
-            'alert-type' => 'success'
-        );
-        return redirect("/admin/member/{$add_user->id}")->with($notification);
+        if($add_user==true){
+            Session::flash('success','Create Member');
+            return redirect("/admin/member/{$add_user->id}");
+        }else{
+            Session::flash('error','Create  Member');
+        }
 
     }
 
@@ -485,10 +485,10 @@ class AdminController extends Controller
 
         $add_user->save();
         if($add_user==true){
-            Session::flash('success','Create New Member');
+            Session::flash('success','Update Member');
             return redirect("admin/member/{$add_user->id}");
         }else{
-            Session::flash('error','Failed to Create Member');
+            Session::flash('error','Update Member');
         }
         
 
@@ -728,7 +728,7 @@ class AdminController extends Controller
 
         $add_user->save();
         if($add_user==true){
-            Session::flash('success','Create Update Member');
+            Session::flash('success',' Update Member');
             return redirect("admin/member/{$add_user->id}");
         }else{
             Session::flash('error','Failed to Update Member');
