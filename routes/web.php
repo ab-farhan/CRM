@@ -122,7 +122,7 @@ Route::prefix('admin')->name('admin.')->group(function()
     Route::post('/basic/update/{id}', [AdminController::class, 'basicUpdate'])->middleware('auth:admin');
 
     //email send
-    Route::get('/email',[EmailController::class,'create']);
+    Route::get('/email/{id}',[EmailController::class,'create'])->middleware('auth:admin');
     Route::post('/email',[EmailController::class,'sendEmail'])->name('send.email');
    
 });

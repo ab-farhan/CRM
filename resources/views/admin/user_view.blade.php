@@ -147,7 +147,7 @@
                                        <table cellpadding="0" cellspacing="0" border="0" align="center" width="100%" style="border: 0px; margin-left: 20px">
                                            <tr class="br_none">
                                                <td style="border: 0px !important">
-                                                   <p>Nommies's Photo1:</p>
+                                                   <p>Nommies's Photo:</p>
 
                                                </td>
                                                <td height="120" width="120" style="border: 0px; ">
@@ -252,17 +252,6 @@
                                    <td style="border-left:1px solid #C9CACC;">{{$user->description}}</td>
                                </tr>
 
-
-                               <tr>
-                                   <td></td>
-                                   <td>
-                                       <h3 style="color: red;">Total Due </h3>
-                                   </td>
-                               </tr>
-                               <tr>
-                                   <td></td>
-                                   <td class="bg_red" style="background: red; color: #fff;border-color: red">{{$user->due_amount}} </td>
-                               </tr>
                                <tr class="br_none">
                                    <td style="border: 0px;padding: 0px;" class="pb_0 pl_0">
                                        <table cellpadding="0" cellspacing="0" border="0" align="center" width="100%">

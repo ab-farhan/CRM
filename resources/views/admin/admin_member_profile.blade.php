@@ -421,6 +421,7 @@
                       <th>Paid Date</th>
                       <th>Due Date</th>
                       <th>Note</th>
+                      <th>Send Mail</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -433,6 +434,9 @@
                       <td>{{ $user->booking_money_paid_date }}</td>
                       <td>{{ $user->booking_money_due_date }}</td>
                       <td>{{ $user->booking_money_note }}</td>
+                      <td>
+                          <a href="{{url('/admin/email/'.$user->id)}}"type="submit" class="btn btn-success"><i class="fa fa-paper-plane"></i> Send</a>
+                      </td>
                     </tr>
 
                     <tr>
@@ -443,6 +447,9 @@
                       <td>{{ $user->down_payment_paid_date }}</td>
                       <td>{{ $user->down_payment_due_date }}</td>
                       <td>{{ $user->down_payment_note }}</td>
+                      <td>
+                        <a href="{{url('/admin/email/'.$user->id)}}"type="submit" class="btn btn-success"><i class="fa fa-paper-plane"></i> Send</a>
+                    </td>
                     </tr>
                     <tr>
                       <td>Car Parking</td>
@@ -452,6 +459,9 @@
                       <td>{{ $user->car_parking_paid_date }}</td>
                       <td>{{ $user->car_parking_due_date }}</td>
                       <td>{{ $user->car_parking_note }}</td>
+                      <td>
+                        <a href="{{url('/admin/email/'.$user->id)}}"type="submit" class="btn btn-success"><i class="fa fa-paper-plane"></i> Send</a>
+                    </td>
                     </tr>
 
                     <tr>
@@ -462,6 +472,9 @@
                       <td>{{ $user->land_filling_1_paid_date }}</td>
                       <td>{{ $user->land_filling_1_due_date }}</td>
                       <td>{{ $user->land_filling_1_note }}</td>
+                      <td>
+                        <a href="{{url('/admin/email/'.$user->id)}}"type="submit" class="btn btn-success"><i class="fa fa-paper-plane"></i> Send</a>
+                    </td>
                     </tr>
 
                     <tr>
@@ -472,6 +485,9 @@
                       <td>{{ $user->land_filling_2_paid_date }}</td>
                       <td>{{ $user->land_filling_2_due_date }}</td>
                       <td>{{ $user->land_filling_2_note }}</td>
+                      <td>
+                        <a href="{{url('/admin/email/'.$user->id)}}"type="submit" class="btn btn-primary"><i class="fa fa-paper-plane"></i> Send</a>
+                    </td>
                     </tr>
 
                     <tr>
@@ -482,6 +498,9 @@
                       <td>{{ $user->building_pilling_paid_date }}</td>
                       <td>{{ $user->building_pilling_due_date }}</td>
                       <td>{{ $user->building_pilling_note }}</td>
+                      <td>
+                        <a href="{{url('/admin/email/'.$user->id)}}"type="submit" class="btn btn-primary"><i class="fa fa-paper-plane"></i> Send</a>
+                    </td>
                     </tr>
 
                     <tr>
@@ -492,6 +511,9 @@
                       <td>{{ $user->first_roof_paid_date }}</td>
                       <td>{{ $user->first_roof_due_date }}</td>
                       <td>{{ $user->roof_casting_note }}</td>
+                      <td>
+                        <a href="{{url('/admin/email/'.$user->id)}}"type="submit" class="btn btn-primary"><i class="fa fa-paper-plane"></i> Send</a>
+                    </td>
                     </tr>
 
                     <tr>
@@ -502,6 +524,9 @@
                       <td>{{ $user->finishing_work_paid_date }}</td>
                       <td></td>
                       <td>{{ $user->finishing_work_note }}</td>
+                      <td>
+                        <a href="{{url('/admin/email/'.$user->id)}}"type="submit" class="btn btn-primary"><i class="fa fa-paper-plane"></i> Send</a>
+                    </td>
                     </tr>
                     <tr>
                       <td>After Handover Money</td>
@@ -511,6 +536,9 @@
                       <td>{{ $user->after_handover_paid_date }}</td>
                       <td></td>
                       <td>{{ $user->after_handover_money_note }}</td>
+                      <td>
+                        <a href="{{url('/admin/email/'.$user->id)}}"type="submit" class="btn btn-primary"><i class="fa fa-paper-plane"></i> Send</a>
+                    </td>
                     </tr>
 
                     {{-- @foreach ($user->no_of_installment as $item)
@@ -536,6 +564,9 @@
                         <td> {{$ins[$i]->installment_date}} </td>
                         <td> {{$ins[$i]->installment_due_date}} </td>
                         <td> {{$ins[$i]->installment_note}} </td>
+                        <td>
+                          <a href="{{url('/admin/email/'.$user->id)}}"type="submit" class="btn btn-success"><i class="fa fa-paper-plane"></i> Send</a>
+                      </td>
 
                       @else
                       <td>Paid :0  Due : 0</td>
@@ -543,6 +574,9 @@
                         <td> 01/01/2021 </td>
                         <td> {{date('d-m-Y', strtotime("+$i months", strtotime($timeformate)))}} </td>
                         <td></td>
+                        <td>
+                          <a href="{{url('/admin/email/'.$user->id)}}"type="submit" class="btn btn-success"><i class="fa fa-paper-plane"></i> Send</a>
+                      </td>
 
                       @endif
 
@@ -572,15 +606,10 @@
     <div class="row">
       <div class="col-md-8 mx-auto">
         <div class="contact-form">
-          <h1>Get in Touch</h1>
-                  {{-- @if(session()->has('message'))
-                      <div class="alert alert-success">
-                          {{ session()->get('message') }}
-                      </div>
-                  @endif --}}
-                  <form action="{{ route('admin.send.email') }}" method="post">
+          
+          <form action="{{ route('admin.send.email') }}" method="post">
                   @csrf
-            <div class="row ">
+            <div class="row d-none">
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="inputName">Name</label>

@@ -2,19 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 
 class EmailController extends Controller
 {
-    public function create()
+    public function create(Request $request)
     {
-        return view('email');
+      $id=$request->id;
+      $user=User::where('id',$id)->first();
+        return view('email',compact('user'));
     }
 
     public function sendEmail(Request $request)
     {
+      $id=$request->id;
         $request->validate([
           'email' => 'required|email',
           'subject' => 'required',
@@ -35,7 +39,7 @@ class EmailController extends Controller
         });
     
         Session::flash('success',"Send Email");
-        return back();
+        return redirect("admin/member/{$id}");
     
        
     }

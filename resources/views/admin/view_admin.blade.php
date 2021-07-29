@@ -20,18 +20,15 @@
 
         <div class="row">
             <div class="col-12">
-                <div class="box card card-body">
-                    <div class="box-header with-border">
-                        <div class="box-body">
-                            <div class="box">
-                                <div class="card-header px-0">
+                <div class="box card ">
+                                <div class="card-header">
                                     {{-- <h3 class="box-title d-inline-block float-left"></h3> --}}
                                     <a class='col-lg-offset-5 btn btn-success float-right' href="{{ route('admin.create_admin') }}"><i class="fas fa-plus-circle mr-2"></i> Add Admin</a>
                                 </div>
                             
                                 <!-- /.box-header -->
-                                <div class="box-body card card-body">
-                                    <table id="example1" class="table table-bordered table-striped" >
+                                <div class="card-body table-responsive">
+                                    <table id="example2" class="table  table-bordered table-striped " >
 
                                         <tr class="bg-primary">
                                             <th>SL No.</th>
@@ -53,9 +50,6 @@
                                         @endforeach
                                     </table>
                                 </div>
-                                <!-- /.box-body -->
-                            </div>
-                        </div>
 
                     </div>
 

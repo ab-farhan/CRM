@@ -34,9 +34,10 @@
   <script src="{{ asset('backend/dist/js/sweetalert.min.js') }}"></script>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
+  {{-- success or error message  --}}
   @if(Session::has('success'))
   <script>
-      swal({title: "Sucessfully",text: "{{Session::get('success') }}",icon: "success",});
+      swal({title: "Sucessfully",text: " {{Session::get('success') }}",icon: "success",});
   </script>
   @endif
   @if(Session::has('error'))
